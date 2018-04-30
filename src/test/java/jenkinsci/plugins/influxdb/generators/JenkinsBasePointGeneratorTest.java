@@ -2,6 +2,7 @@ package jenkinsci.plugins.influxdb.generators;
 
 import hudson.EnvVars;
 import hudson.model.*;
+import hudson.tasks.junit.TestResultAction;
 import jenkins.model.Jenkins;
 import jenkinsci.plugins.influxdb.renderer.MeasurementRenderer;
 import jenkinsci.plugins.influxdb.renderer.ProjectNameRenderer;
@@ -15,6 +16,8 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
+
+import java.util.Collections;
 
 /**
  * @author Damien Coraboeuf <damien.coraboeuf@gmail.com>
@@ -58,11 +61,13 @@ public class JenkinsBasePointGeneratorTest {
         mockedEnvVars = Mockito.mock(EnvVars.class);
         Computer computer = Mockito.mock(Computer.class);
         measurementRenderer = new ProjectNameRenderer(CUSTOM_PREFIX, null);
+        TestResultAction testResultAction = Mockito.mock(TestResultAction.class);
 
         Mockito.when(build.getNumber()).thenReturn(BUILD_NUMBER);
         Mockito.when(build.getBuildStatusSummary()).thenReturn(new Run.Summary(false, "OK"));
         Mockito.when(build.getParent()).thenReturn(job);
         Mockito.when(build.getEnvironment(listener)).thenReturn(mockedEnvVars);
+        Mockito.when(build.getAction(TestResultAction.class)).thenReturn(testResultAction);
         Mockito.when(executor.getOwner()).thenReturn(computer);
         Mockito.when(computer.getName()).thenReturn("slave-1");
         Mockito.when(job.getName()).thenReturn(JOB_NAME);
@@ -71,6 +76,7 @@ public class JenkinsBasePointGeneratorTest {
         Mockito.when(mockedEnvVars.get(JENKINS_ENV_VALUE_FIELD)).thenReturn(JENKINS_ENV_RESOLVED_VALUE_FIELD);
         Mockito.when(mockedEnvVars.get(JENKINS_ENV_VALUE_TAG)).thenReturn(JENKINS_ENV_RESOLVED_VALUE_TAG);
         Mockito.when(mockedEnvVars.get("NODE_NAME")).thenReturn(null);
+        Mockito.when(testResultAction.getFailedTests()).thenReturn(Collections.emptyList());
 
         currTime = System.currentTimeMillis();
     }
