@@ -31,18 +31,18 @@ THE SOFTWARE.
         <version>3.50</version>
     </parent>
 
-    <artifactId>influxdb</artifactId>
-    <url>https://github.com/jenkinsci/influxdb-plugin</url>
-    <version>2.2-SNAPSHOT</version>
+    <artifactId>influxdb-ep</artifactId>
+    <url>https://github.com/jbrockmeyer/influxdb-plugin</url>
+    <version>2.2-SNAPSHOT-ep</version>
     <packaging>hpi</packaging>
 
-    <name>InfluxDB Plugin</name>
+    <name>InfluxDB Plugin - EP</name>
     <description>Plugin for pushing time series data to InfluxDB, inspired by https://github.com/jrajala-eficode/jenkins-ci.influxdb-plugin and http://christoph-burmeister.eu/?p=2906</description>
 
     <scm>
-        <connection>scm:git:ssh://github.com/jenkinsci/influxdb-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/jenkinsci/influxdb-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/influxdb-plugin</url>
+        <connection>scm:git:ssh://github.com/jbrockmeyer/influxdb-plugin.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/jbrockmeyer/influxdb-plugin.git</developerConnection>
+        <url>https://github.com/jbrockmeyer/influxdb-plugin</url>
         <tag>HEAD</tag>
     </scm>
 
